@@ -10,14 +10,14 @@ function reducer(state, action) {
 
         if (itemIndex !== -1) {
           draftState[itemIndex].quantity += 1;
-          return;
+          break;
         }
 
         draftState.push({
           ...action.item,
           quantity: 1,
         });
-        return;
+        break;
       }
 
       case 'delete-item': {
@@ -26,9 +26,17 @@ function reducer(state, action) {
         );
 
         draftState.splice(itemIndex, 1);
-        return;
+        break;
+      }
+
+      case 'set-items': {
+        draftState = [...action.savedItems];
+        return draftState;
       }
     }
+
+    // save cart to local storage
+    window.localStorage.setItem('cart', JSON.stringify(draftState));
   });
 }
 

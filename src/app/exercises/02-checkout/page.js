@@ -13,6 +13,21 @@ function CheckoutExercise() {
     []
   );
 
+  React.useEffect(() => {
+    const savedItemsStr = window.localStorage.getItem('cart');
+    console.log(savedItemsStr);
+
+    if (typeof(savedItemsStr) !== undefined) {
+      const savedItems = JSON.parse(savedItemsStr);
+      if(savedItems != null) {
+        dispatch({
+          type: 'set-items',
+          savedItems,
+        });
+      }
+    }
+  }, []);
+
   return (
     <>
       <h1>Neighborhood Shop</h1>
