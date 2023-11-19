@@ -6,9 +6,15 @@ import Interview from './Interview';
 import './styles.css';
 
 function InterviewExercise() {
-  const isDesktop = useMediaQuery({
+  const [isDesktop, setIsDesktop] = React.useState(false);
+  
+  const t = useMediaQuery({
     query: '(min-width: 500px)',
   });
+
+  React.useEffect(() => {
+    setIsDesktop(t);
+  }, [t]);
 
   return (
     <main>
